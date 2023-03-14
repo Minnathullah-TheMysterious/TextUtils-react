@@ -29,6 +29,7 @@ export default function TextForm(props) {
     const text = document.getElementById("textBox");
     text.select();
     navigator.clipboard.writeText(text.value);
+    document.getSelection().removeAllRanges() // to remove select
     props.showAlert(' copied to Clipboard', 'success')
   };
 
@@ -41,50 +42,55 @@ export default function TextForm(props) {
   return (
     <>
       <div className="container my-4">
-        <h1 className={`text-${props.mode === 'light'? 'dark': 'light'}`}>{props.heading}</h1>
+        <h1 className={`my-4 text-${props.mode === 'light'? 'dark': 'light'}`}>{props.heading}</h1>
         <div className="form-floating">
           <textarea
             className="form-control"
             id="textBox"
             value={text}
             onChange={handleOnChange}
-            style={{ height: 200, backgroundColor: props.mode === 'light'? 'azure': 'black', color: props.mode === 'light'? 'black': 'white'}}
+            style={{ height: 200, backgroundColor: props.mode === 'light'? 'azure': '#26473d', color: props.mode === 'light'? 'black': 'white'}}
           ></textarea>
         </div>
       </div>
       <div className="container">
         <button
-          className="btn btn-success"
+          className="btn btn-success mx-1 my-1"
           type="button"
           onClick={handleUcClick}
+          disabled={text.length === 0}
         >
           Convert to Uppercase
         </button>
         <button
-          className="btn btn-success ms-2"
+          className="btn btn-success mx-1 my-1"
           type="button"
           onClick={handleLcClick}
+          disabled={text.length === 0}
         >
           Convert to LowerCase
         </button>
         <button
-          className="btn btn-success ms-2"
+          className="btn btn-success mx-1 my-1"
           type="button"
           onClick={handleClearText}
+          disabled={text.length === 0}
         >
           Clear Text
         </button>
         <button
-          className="btn btn-success ms-2"
+          className="btn btn-success mx-1 my-1"
           type="button"
           onClick={handleCopy}
+          disabled={text.length === 0}
         >
           Copy Text
         </button>
         <button
-          className="btn btn-success ms-2"
+          className="btn btn-success mx-1 my-1"
           type="button"
           onClick={handleExtraSpaces}
+          disabled={text.length === 0}
         >
           Remove Extra Spaces
         </button>
@@ -95,19 +101,19 @@ export default function TextForm(props) {
         <h2>Your Text Summary</h2>
         <p>
           <b>
-            Words: {text.split(" ").length} & Characters: {text.length}
+            Words: {text.split(" ").filter((element)=>{return element.length !== 0}).length} & Characters: {text.length}
           </b>
         </p>
         <p>
           <b>
-            {0.0032 * text.split(" ").length} minutes to read (Average reader)
+            {0.0032 * text.split(" ").filter((element)=>{return element.length !== 0}).length} minutes to read (Average reader)
           </b>
         </p>
         <h2>Preview</h2>
         <p>
           {text.length > 0
             ? text
-            : "Enter the text in the above box to Preview here"}
+            : "Nothing to preview here"}
         </p>
       </div>
     </>
