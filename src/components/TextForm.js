@@ -26,10 +26,11 @@ export default function TextForm(props) {
   };
 
   const handleCopy = () => {
-    const text = document.getElementById("textBox");
-    text.select();
-    navigator.clipboard.writeText(text.value);
-    document.getSelection().removeAllRanges() // to remove select
+    // const text = document.getElementById("textBox");
+    // text.select();
+    // navigator.clipboard.writeText(text.value);
+    // document.getSelection().removeAllRanges() // to remove select
+    navigator.clipboard.writeText(text);
     props.showAlert(' copied to Clipboard', 'success')
   };
 
@@ -101,12 +102,12 @@ export default function TextForm(props) {
         <h2>Your Text Summary</h2>
         <p>
           <b>
-            Words: {text.split(" ").filter((element)=>{return element.length !== 0}).length} & Characters: {text.length}
+            Words: {text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} & Characters: {text.length}
           </b>
         </p>
         <p>
           <b>
-            {0.0032 * text.split(" ").filter((element)=>{return element.length !== 0}).length} minutes to read (Average reader)
+            {0.0032 * text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} minutes to read (Average reader)
           </b>
         </p>
         <h2>Preview</h2>

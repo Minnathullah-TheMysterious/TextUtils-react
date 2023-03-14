@@ -6,12 +6,11 @@ function Navbar(props) {
   return (
     <>
       <nav
-        className={`navbar navbar-expand-lg bg-body-tertiary bg-${props.mode}`}  
+        className={`navbar navbar-expand-lg bg-body-tertiary bg-${props.mode}`}
         data-bs-theme={`${props.mode}`}
       >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-          {/* <a className="navbar-brand" href="#"> */}
             {props.title}
           </Link>
           <button
@@ -28,8 +27,7 @@ function Navbar(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/">
-                {/* <a className="nav-link active" aria-current="page" href="#"> */}
+                <Link className="nav-link" aria-current="page" to="/">
                   Home
                 </Link>
               </li>
@@ -40,7 +38,11 @@ function Navbar(props) {
               </li>
             </ul>
           </div>
-          <div className={`form-check form-switch text-${props.mode === 'light'? 'dark': 'light'}`}>
+          <div
+            className={`form-check form-switch text-${
+              props.mode === "light" ? "dark" : "light"
+            }`}
+          >
             <input
               className="form-check-input"
               type="checkbox"
@@ -52,7 +54,7 @@ function Navbar(props) {
               className="form-check-label"
               htmlFor="flexSwitchCheckDefault"
             >
-              Enable DarkMode 
+              Enable DarkMode
             </label>
           </div>
         </div>
