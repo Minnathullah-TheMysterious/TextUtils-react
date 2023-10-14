@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 export default function TextForm(props) {
-
   const [text, setText] = useState("");
 
   const handleOnChange = (event) => {
@@ -11,18 +10,18 @@ export default function TextForm(props) {
   const handleUcClick = () => {
     const newText = text.toUpperCase();
     setText(newText);
-    props.showAlert(' Text converted to Uppercase', 'success')
+    props.showAlert(" Text converted to Uppercase", "success");
   };
 
   const handleLcClick = () => {
     const newText = text.toLowerCase();
     setText(newText);
-    props.showAlert(' Text converted to Lowercase', 'success')
+    props.showAlert(" Text converted to Lowercase", "success");
   };
 
   const handleClearText = () => {
     setText(" ");
-    props.showAlert(' Text cleared', 'warning')
+    props.showAlert(" Text cleared", "warning");
   };
 
   const handleCopy = () => {
@@ -31,26 +30,34 @@ export default function TextForm(props) {
     // navigator.clipboard.writeText(text.value);
     // document.getSelection().removeAllRanges() // to remove select
     navigator.clipboard.writeText(text);
-    props.showAlert(' copied to Clipboard', 'success')
+    props.showAlert(" copied to Clipboard", "success");
   };
 
   const handleExtraSpaces = () => {
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
-    props.showAlert(' Extra spaces removed', 'success')
+    props.showAlert(" Extra spaces removed", "success");
   };
 
   return (
     <>
       <div className="container my-4">
-        <h1 className={`my-4 text-${props.mode === 'light'? 'dark': 'light'}`}>{props.heading}</h1>
+        <h1
+          className={`my-4 text-${props.mode === "light" ? "dark" : "light"}`}
+        >
+          {props.heading}
+        </h1>
         <div className="form-floating">
           <textarea
             className="form-control"
             id="textBox"
             value={text}
             onChange={handleOnChange}
-            style={{ height: 200, backgroundColor: props.mode === 'light'? 'azure': '#26473d', color: props.mode === 'light'? 'black': 'white'}}
+            style={{
+              height: 200,
+              backgroundColor: props.mode === "light" ? "azure" : "#26473d",
+              color: props.mode === "light" ? "black" : "white",
+            }}
           ></textarea>
         </div>
       </div>
@@ -97,25 +104,33 @@ export default function TextForm(props) {
         </button>
       </div>
       <div
-        className={`container my-4 text-${props.mode === 'light'? 'dark': 'light'}`}
+        className={`container my-4 text-${
+          props.mode === "light" ? "dark" : "light"
+        }`}
       >
         <h2>Your Text Summary</h2>
         <p>
           <b>
-            Words: {text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} & Characters: {text.length}
+            Words:{" "}
+            {
+              text.split(/\s+/).filter((element) => {
+                return element.length !== 0;
+              }).length
+            }{" "}
+            & Characters: {text.length}
           </b>
         </p>
         <p>
           <b>
-            {0.0032 * text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} minutes to read (Average reader)
+            {0.0032 *
+              text.split(/\s+/).filter((element) => {
+                return element.length !== 0;
+              }).length}{" "}
+            minutes to read (Average reader)
           </b>
         </p>
         <h2>Preview</h2>
-        <p>
-          {text.length > 0
-            ? text
-            : "Nothing to preview here"}
-        </p>
+        <p>{text.length > 0 ? text : "Nothing to preview here"}</p>
       </div>
     </>
   );
